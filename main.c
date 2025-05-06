@@ -34,7 +34,7 @@ int main(){
      for(int bb = 0; bb < 16; bb++) {
           printf(" %d ", HammingCode[bb]);
      }
-     
+
      printf("\n Nesse caso, qual a resposta? \n");
      printf("\t 1. Não há erro. \n");
      printf("\t 2. Há 1 erro. \n");
@@ -55,7 +55,12 @@ int main(){
                if (chute == WrongBit[0]) {
                     printf("Correto!");
                } else {
-                    printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
+                    if (Choice - 1 != ErrorSelected) {
+                         printf("Errado! Não houve erro no código, ele estava correto.")
+                    } else {
+                         printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
+                    }
+                    
                }
                break;
      }
@@ -160,7 +165,7 @@ void SetParities() {
 }
 
 void ErrorEvent (){
-     int ErrorPlaceSelected[16];
+//     int ErrorPlaceSelected[16];
      int ErrorEventSelected;
      if (ErrorSelected == 1) {
          ErrorEventSelected = rand() % 16;
