@@ -4,30 +4,63 @@
 #include <time.h>    // Para inicializar o gerador de números aleatórios com base no tempo
 
 int HammingCode[16];
+int HammingPosition[16];
 int ErrorSelected;
 int sums[5];
+int WrongBit[2];
 
 void SetHammingCode();
 void CalcParities();
 void SetParities();
-
+void ErrorEvent();
 
 int main(){
+     int Choice, chute;
+
      srand(time(NULL));
-     ErrorSelected = rand() % 3;
+     ErrorSelected = rand() % 2;
      SetHammingCode();
      SetHammingCode();
      CalcParities();
      SetParities();
+     ErrorEvent(ErrorSelected);
 
      printf("Tente com este. A paridade é par, e os bits de paridade são os de numeração 1,2,4 e 8 \n");
      for(int bb = 0; bb < 16; bb++) {
-          printf("%02d ",bb);
+          printf("%02d ",HammingPosition[bb]);
      }
+
      printf("\n");
      for(int bb = 0; bb < 16; bb++) {
           printf(" %d ", HammingCode[bb]);
      }
+     
+     printf("\n Nesse caso, qual a resposta? \n");
+     printf("\t 1. Não há erro. \n");
+     printf("\t 2. Há 1 erro. \n");
+     //printf("\t 1. Há mais de um erro. \n");
+    scanf("%d", &Choice);
+
+     switch(Choice) {
+          case 1:
+               if (Choice - 1 == ErrorSelected) {
+                    printf("Correto! \n");
+               } else {
+                    printf("Errado! Há sim um bit errado, o bit %d. \n", WrongBit[0]);
+               }
+               break;
+          case 2:
+               printf("Em qual bit há o erro? \n");
+               scanf("%d", &chute);
+               if (chute == WrongBit[0]) {
+                    printf("Correto!");
+               } else {
+                    printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
+               }
+               break;
+     }
+
+     return 0;
 }  
 
 void SetHammingCode() {
@@ -39,6 +72,7 @@ void SetHammingCode() {
      for (int aa = 1; aa < 16; aa++) {
           result = log(aa) / log(base);
           resto = fmod(result, 1.0);
+          HammingPosition[aa] = aa;
           if (resto == 0) {
                HammingCode[aa] = 0;
           } else {
@@ -125,3 +159,16 @@ void SetParities() {
 
 }
 
+void ErrorEvent (){
+     int ErrorPlaceSelected[16];
+     int ErrorEventSelected;
+     if (ErrorSelected == 1) {
+         ErrorEventSelected = rand() % 16;
+         if (HammingCode[ErrorEventSelected] == 0) {
+               HammingCode[ErrorEventSelected] = 1;
+          } else {
+               HammingCode[ErrorEventSelected] = 0;
+          }
+          WrongBit[0] = HammingPosition[ErrorEventSelected];
+     } 
+}
