@@ -1,1 +1,1 @@
-Este é um puzzle de Hamming
+Este é um puzzle de Hamming, criado para você testar seus conhecimentos e se consegue reconhecer se houve mudança ou não pelo próprio sistema de paridade de Hamming. Espero que isso ajude.
