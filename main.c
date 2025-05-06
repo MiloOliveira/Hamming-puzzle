@@ -56,7 +56,7 @@ int main(){
                     printf("Correto!");
                } else {
                     if (Choice - 1 != ErrorSelected) {
-                         printf("Errado! Não houve erro no código, ele estava correto.")
+                         printf("Errado! Não houve erro no código, ele estava correto.");
                     } else {
                          printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
                     }
@@ -177,3 +177,4 @@ void ErrorEvent (){
           WrongBit[0] = HammingPosition[ErrorEventSelected];
      } 
 }
+
