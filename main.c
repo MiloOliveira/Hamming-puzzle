@@ -1,8 +1,7 @@
-#include <stdio.h>   // Para comandos básicos de entrada e saída
-#include <stdlib.h>  // Para alocação de memória, controle de processos e números aleatórios
-#include <math.h>    // Para funções matemáticas
-#include <time.h>    // Para inicializar o gerador de números aleatórios com base no tempo
-
+#include <stdio.h>   
+#include <stdlib.h>  
+#include <math.h>    
+#include <time.h>    
 int HammingCode[16];
 int HammingPosition[16];
 int ErrorSelected;
@@ -68,6 +67,8 @@ int main(){
                          
                     }
                     break;
+               default:
+                    printf("Escolha inválida. \n");
           }
      } 
      return 0;
