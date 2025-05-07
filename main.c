@@ -15,56 +15,61 @@ void SetParities();
 void ErrorEvent();
 
 int main(){
-     int Choice, chute;
+     int Choice, chute, rodadas;
 
      srand(time(NULL));
-     ErrorSelected = rand() % 2;
-     SetHammingCode();
-     SetHammingCode();
-     CalcParities();
-     SetParities();
-     ErrorEvent(ErrorSelected);
 
-     printf("Tente com este. A paridade é par, e os bits de paridade são os de numeração 1,2,4 e 8 \n");
-     for(int bb = 0; bb < 16; bb++) {
-          printf("%02d ",HammingPosition[bb]);
-     }
+     printf("Olá. Quantas rodadas você quer jogar? \n");
+     scanf("%d", &rodadas);
 
-     printf("\n");
-     for(int bb = 0; bb < 16; bb++) {
-          printf(" %d ", HammingCode[bb]);
-     }
+     for (int zz = 0; zz < rodadas; zz++) {
+          ErrorSelected = rand() % 2;
+          SetHammingCode();
+          SetHammingCode();
+          CalcParities();
+          SetParities();
+          ErrorEvent(ErrorSelected);
+          printf("Rodada %d \n", zz +1);
+          printf("Tente com este. A paridade é par, e os bits de paridade são os de numeração 1,2,4 e 8 \n");
+          for(int bb = 0; bb < 16; bb++) {
+               printf("%02d ",HammingPosition[bb]);
+          }
 
-     printf("\n Nesse caso, qual a resposta? \n");
-     printf("\t 1. Não há erro. \n");
-     printf("\t 2. Há 1 erro. \n");
-     //printf("\t 1. Há mais de um erro. \n");
-    scanf("%d", &Choice);
+          printf("\n");
+          for(int bb = 0; bb < 16; bb++) {
+               printf(" %d ", HammingCode[bb]);
+          }
 
-     switch(Choice) {
-          case 1:
-               if (Choice - 1 == ErrorSelected) {
-                    printf("Correto! \n");
-               } else {
-                    printf("Errado! Há sim um bit errado, o bit %d. \n", WrongBit[0]);
-               }
-               break;
-          case 2:
-               printf("Em qual bit há o erro? \n");
-               scanf("%d", &chute);
-               if (chute == WrongBit[0]) {
-                    printf("Correto!");
-               } else {
-                    if (Choice - 1 != ErrorSelected) {
-                         printf("Errado! Não houve erro no código, ele estava correto.");
+          printf("\n Nesse caso, qual a resposta? \n");
+          printf("\t 1. Não há erro. \n");
+          printf("\t 2. Há 1 erro. \n");
+          //printf("\t 1. Há mais de um erro. \n");
+     scanf("%d", &Choice);
+
+          switch(Choice) {
+               case 1:
+                    if (Choice - 1 == ErrorSelected) {
+                         printf("Correto! \n");
                     } else {
-                         printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
+                         printf("Errado! Há sim um bit errado, o bit %d. \n", WrongBit[0]);
                     }
-                    
-               }
-               break;
-     }
-
+                    break;
+               case 2:
+                    printf("Em qual bit há o erro? \n");
+                    scanf("%d", &chute);
+                    if (chute == WrongBit[0]) {
+                         printf("Correto!");
+                    } else {
+                         if (Choice - 1 != ErrorSelected) {
+                              printf("Errado! Não houve erro no código, ele estava correto.");
+                         } else {
+                              printf("Errou! o bit errado é o bit %d. \n", WrongBit[0]);
+                         }
+                         
+                    }
+                    break;
+          }
+     } 
      return 0;
 }  
 
